@@ -1,10 +1,15 @@
 package pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.Map;
-
+@Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PokemonResultPojo {
 
     private String url;
@@ -16,14 +21,6 @@ public class PokemonResultPojo {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

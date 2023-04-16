@@ -54,10 +54,26 @@ public class Pokemon {
      */
 
     @Test
-    public void getPokemonAndAbilities() {}
+    public void getPokemonAndAbilities() {
+        String dynamicLink = "https://pokeapi.co/api/v2/pokemon";
+        for (int i = 1; i <= 100; i++) {
+            dynamicLink = dynamicLink.concat(String.valueOf(i));
+            Response response = RestAssured.given()
+                    .header("Accept", "application/json")
+                    .queryParam("limit", "100")
+                    .when()
+                    .get("https://pokeapi.co/api/v2/pokemon")
+                    .then()
+                    .statusCode(200)
+                    .extract()
+                    .response();
 
+            PokemonPojo deserializedResp = response.as(PokemonPojo.class);
+            List<PokemonResultPojo> results = deserializedResp.getResults();
+            for (int j = 0; j < results.size(); j++) {
+                System.out.println(results.get(j).getName());
+
+            }
+        }
     }
-
-
-
-
+}

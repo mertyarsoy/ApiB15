@@ -1,8 +1,15 @@
 package pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 import java.util.Map;
 
+@Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StarWarsPojo {
 
     private int count;
@@ -11,44 +18,5 @@ public class StarWarsPojo {
     private List<Map<String, Object>> maps;
     private List<StarWarsResultPojo> results;
 
-    public List<StarWarsResultPojo> getResults() {
-        return results;
-    }
-
-    public void setResults(List<StarWarsResultPojo> results) {
-        this.results = results;
-    }
-
-    public List<Map<String, Object>> getMaps() {
-        return maps;
-    }
-
-    public void setMaps(List<Map<String, Object>> maps) {
-        this.maps = maps;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public String getNext() {
-        return next;
-    }
-
-    public void setNext(String next) {
-        this.next = next;
-    }
-
-    public String getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(String previous) {
-        this.previous = previous;
-    }
 
 }

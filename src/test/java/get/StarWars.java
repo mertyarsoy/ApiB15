@@ -1,7 +1,9 @@
 package get;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
@@ -148,7 +150,7 @@ public class StarWars {
             });
 
             List<Map<String, Object>> result = (List<Map<String, Object>>) deserializedResponse.get("results");
-            System.out.println("page " + i + "/");
+          //  System.out.println("page " + i + "/");
             for (Map<String, Object> character : result) {
                 if (character.get("gender").equals("female")) {
                     System.out.println(character.get("name"));
@@ -173,6 +175,43 @@ public class StarWars {
             System.out.println(results.get(i).getName());
 //            System.out.println(results.get(i).getGender());
         }
+    }
+
+    @Test
+    public void StarWarsTest(){
+        //https://swapi.dev/api/people
+
+        RestAssured.baseURI = "https://swapi.dev";
+        RestAssured.basePath = "api/people";
+        //RestAssured.given().header("Accept","application/json").
+       Response response = RestAssured.given().accept(ContentType.JSON)//.log().all() //--> prints ONLY ALL request
+                .when().get().then().statusCode(200)//.log().all() // prints ALL
+                .extract().response();
+
+        StarWarsPojo parsedResponse = response.as(StarWarsPojo.class);
+
+        int actualTotalCharactersCount = parsedResponse.getResults().size(); // counting characters from first page
+        System.out.println(actualTotalCharactersCount);
+        String nextUrl = parsedResponse.getNext(); // gets value of "next" field from JSON response
+
+        //1. Make a GET request to nextUrl
+        //2. Count characters from next page
+        //3. Get next page URL
+        while (nextUrl != null) {
+            //1. Make a GET request to nextUrl
+            response = RestAssured.given().accept(ContentType.JSON)
+                    .when().get(nextUrl).then().statusCode(200).contentType(ContentType.JSON) // validating response format is JSON
+                    .extract().response();
+
+            parsedResponse = response.as(StarWarsPojo.class);
+            //2. Count characters from next page
+            actualTotalCharactersCount += parsedResponse.getResults().size();
+            //3. Get next page URL
+            nextUrl = parsedResponse.getNext();
+
+        }
+        Assert.assertEquals(parsedResponse.getCount(),actualTotalCharactersCount); // validating count equals to total number of characters
+
     }
 
 
