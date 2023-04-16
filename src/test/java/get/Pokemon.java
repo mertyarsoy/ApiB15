@@ -1,13 +1,18 @@
 package get;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
+import pojo.AbilityPojo;
+import pojo.AbilityResultPojo;
 import pojo.PokemonPojo;
 import pojo.PokemonResultPojo;
 
 import java.util.List;
+import java.util.Map;
 
 public class Pokemon {
 
@@ -31,7 +36,7 @@ public class Pokemon {
                 .response();
 
         PokemonPojo deserializedResp = response.as(PokemonPojo.class);
-        Assert.assertEquals(1279, deserializedResp.getCount());
+        Assert.assertEquals(1281, deserializedResp.getCount());
 
         List<PokemonResultPojo> results = deserializedResp.getResults();
         for (int i = 0; i < results.size(); i++) {
@@ -48,4 +53,11 @@ public class Pokemon {
     - get every pokemons ability and store those in Map<String, List<String>>
      */
 
-}
+    @Test
+    public void getPokemonAndAbilities() {}
+
+    }
+
+
+
+

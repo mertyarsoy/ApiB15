@@ -1,8 +1,22 @@
 package pojo;
 
+import org.junit.Test;
+
+import java.util.List;
+import java.util.Map;
+
 public class PokemonResultPojo {
-    private String name;
+
     private String url;
+    private String name;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getName() {
         return name;
@@ -12,11 +26,4 @@ public class PokemonResultPojo {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }
