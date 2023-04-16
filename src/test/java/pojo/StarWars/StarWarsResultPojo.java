@@ -1,4 +1,4 @@
-package pojo;
+package pojo.StarWars;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

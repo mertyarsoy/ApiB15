@@ -1,4 +1,4 @@
-package pojo;
+package pojo.Pokemon;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
@@ -14,7 +14,6 @@ public class PokemonPojo {
     private int count;
     private String next;
     private String previous;
-    private List<Map<String, Object>> maps;
     private List<PokemonResultPojo> results;
 
 

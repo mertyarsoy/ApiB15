@@ -1,21 +1,19 @@
-package pojo;
+package pojo.Pokemon;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.junit.Test;
 
 import java.util.List;
 import java.util.Map;
-
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AbilityPojo {
+public class PokemonResultPojo {
 
-    private Map<String , Object> map;
-    private List<AbilityResultPojo> abilites;
-    private boolean is_hidden;
-    private int slot;
+    private String url;
+    private String name;
 
 
 }

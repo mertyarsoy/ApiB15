@@ -1,15 +1,13 @@
-package get;
+package get.StarWars;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
-import pojo.StarWarsResultPojo;
-import pojo.StarWarsPojo;
-import utils.Shortcut;
+import pojo.StarWars.StarWarsResultPojo;
+import pojo.StarWars.StarWarsPojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +25,8 @@ public class StarWars {
 
     @Test
     public void getSWChars() {
-//        //https://swapi.dev/api/people
-//        RestAssured.given().when().get("https://swapi.dev/api/people").then().statusCode(200).log().body();
-        Shortcut.getAPICode("https://swapi.dev/api/people", 200);
+        //https://swapi.dev/api/people
+        RestAssured.given().when().get("https://swapi.dev/api/people").then().statusCode(200).log().body();
     }
 
     @Test
@@ -57,7 +54,7 @@ public class StarWars {
         //List<Map<String ,Object>> result = (List<Map<String, Object>>) deserializedResponse.get("results");
         //Set<Map.Entry<String ,Object>> pairs = result.entrySet();
         for (Map<String, Object> individual : results) {
-              System.out.println(individual.get("name"));
+            System.out.println(individual.get("name"));
             names.add((String) individual.get("name"));
             if (individual.get("gender").toString().contains("female")) {
                 // System.out.println("Female: "+individual.get("name"));
@@ -150,7 +147,7 @@ public class StarWars {
             });
 
             List<Map<String, Object>> result = (List<Map<String, Object>>) deserializedResponse.get("results");
-          //  System.out.println("page " + i + "/");
+            //  System.out.println("page " + i + "/");
             for (Map<String, Object> character : result) {
                 if (character.get("gender").equals("female")) {
                     System.out.println(character.get("name"));
@@ -161,14 +158,14 @@ public class StarWars {
     }
 
     @Test
-    public void swAPIGetWithPojo(){
-       Response response =  RestAssured.given().header("Accept", "application/json")
+    public void swAPIGetWithPojo() {
+        Response response = RestAssured.given().header("Accept", "application/json")
                 .when().get("https://swapi.dev/api/people").then().statusCode(200).extract().response();
 
-       StarWarsPojo deserializedResp = response.as(StarWarsPojo.class);
-       int actualCount = deserializedResp.getCount();
-       int expectedCount = 82;
-       Assert.assertEquals(expectedCount,actualCount);
+        StarWarsPojo deserializedResp = response.as(StarWarsPojo.class);
+        int actualCount = deserializedResp.getCount();
+        int expectedCount = 82;
+        Assert.assertEquals(expectedCount, actualCount);
 
         List<StarWarsResultPojo> results = deserializedResp.getResults();
         for (int i = 0; i < results.size(); i++) {
@@ -178,13 +175,13 @@ public class StarWars {
     }
 
     @Test
-    public void StarWarsTest(){
+    public void StarWarsTest() {
         //https://swapi.dev/api/people
 
         RestAssured.baseURI = "https://swapi.dev";
         RestAssured.basePath = "api/people";
         //RestAssured.given().header("Accept","application/json").
-       Response response = RestAssured.given().accept(ContentType.JSON)//.log().all() //--> prints ONLY ALL request
+        Response response = RestAssured.given().accept(ContentType.JSON)//.log().all() //--> prints ONLY ALL request
                 .when().get().then().statusCode(200)//.log().all() // prints ALL
                 .extract().response();
 
@@ -210,7 +207,7 @@ public class StarWars {
             nextUrl = parsedResponse.getNext();
 
         }
-        Assert.assertEquals(parsedResponse.getCount(),actualTotalCharactersCount); // validating count equals to total number of characters
+        Assert.assertEquals(parsedResponse.getCount(), actualTotalCharactersCount); // validating count equals to total number of characters
 
     }
 

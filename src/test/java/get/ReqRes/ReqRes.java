@@ -1,10 +1,9 @@
-package get;
+package get.ReqRes;
 
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import org.junit.Test;
-import utils.Shortcut;
 
 import java.util.List;
 import java.util.Map;
