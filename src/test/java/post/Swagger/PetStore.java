@@ -1,11 +1,11 @@
-package post;
+package post.Swagger;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
-import pojo.Pet.PetPojo;
+import pojo.Swagger.PetStorePojo;
 import utils.PayloadUtils;
 
 public class PetStore {
@@ -34,7 +34,7 @@ public class PetStore {
                 .then()
                 .statusCode(200).extract().response();
 
-        PetPojo parsedResponse = response.as(PetPojo.class);
+        PetStorePojo parsedResponse = response.as(PetStorePojo.class);
 
         Assert.assertEquals(petId,parsedResponse.getId());
         Assert.assertEquals(petName,parsedResponse.getName());
@@ -46,7 +46,7 @@ public class PetStore {
                 .then()
                 .statusCode(200).extract().response();
 
-        PetPojo parsedGetResponse = response2.as(PetPojo.class);
+        PetStorePojo parsedGetResponse = response2.as(PetStorePojo.class);
 
         Assert.assertEquals(petId,parsedGetResponse.getId());
         Assert.assertEquals(petName,parsedGetResponse.getName());

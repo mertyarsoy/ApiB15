@@ -1,14 +1,14 @@
 package utils;
 
 public class PayloadUtils {
-    public static String getPetPayload(int petId,String petName,String petStatus){
+    public static String getPetPayload(int petId, String petName, String petStatus) {
         String payload = "{\n" +
-                "    \"id\": "+petId+",\n" +
+                "    \"id\": " + petId + ",\n" +
                 "    \"category\": {\n" +
                 "        \"id\": 0,\n" +
                 "        \"name\": \"string\"\n" +
                 "    },\n" +
-                "    \"name\": \""+petName+"\",\n" +
+                "    \"name\": \"" + petName + "\",\n" +
                 "    \"photoUrls\": [\n" +
                 "        \"string\"\n" +
                 "    ],\n" +
@@ -18,8 +18,17 @@ public class PayloadUtils {
                 "            \"name\": \"string\"\n" +
                 "        }\n" +
                 "    ],\n" +
-                "    \"status\": \""+petStatus+"\"\n" +
+                "    \"status\": \"" + petStatus + "\"\n" +
                 "}";
         return payload;
+    }
+
+    public static String getSlackMessagePayload(String msgText) {
+        String msgPayload = "{\n" +
+                "  \"channel\": \"C052ZQBE39D\",\n" +
+                "  \"text\": \"" + msgText + "\"\n" +
+                "}";
+
+        return msgPayload;
     }
 }
