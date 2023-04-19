@@ -34,25 +34,22 @@ public class SlackApp {
         SlackPojo parsedResponse = response.as(SlackPojo.class);
         JsonPath jsonPath = response.jsonPath();
 
-        Assert.assertTrue("Test Passed",parsedResponse.isOk());
-        Assert.assertEquals("Test Passed","Mert: hello channel,from POSTMAN",parsedResponse.getMessage().getText());
+        Assert.assertTrue("Test Passed", parsedResponse.isOk());
+        Assert.assertEquals("Test Passed", "Mert: hello channel,from POSTMAN", parsedResponse.getMessage().getText());
 
 
         boolean ismessage = jsonPath.getBoolean("ok");
         Assert.assertTrue(ismessage);
 
         String text = jsonPath.getString("message.text");
-        Assert.assertEquals("Mert: hello channel,from POSTMAN",text);
+        Assert.assertEquals("Mert: hello channel,from POSTMAN", text);
 
         String type = jsonPath.getString("message.blocks.elements.type");
-        Assert.assertEquals("[[rich_text_section]]",type);
+        Assert.assertEquals("[[rich_text_section]]", type);
 
-        System.out.println("ok: "+ismessage);
-        System.out.println("text: "+text);
-        System.out.println("type: "+type);
-
-
-
-
+        System.out.println("ok: " + ismessage);
+        System.out.println("text: " + text);
+        System.out.println("type: " + type);
     }
+
 }
