@@ -44,9 +44,14 @@ public class SlackSerialization {
                 .then().statusCode(200)
                 .and().body("channel", Matchers.equalTo("C052ZQBE39D")).extract().response().jsonPath();
 
-        Assert.assertTrue("Passed",jsonPath.getBoolean("ok"));
-        Assert.assertEquals("Passed","C052ZQBE39D",jsonPath.getString("channel"));
+        Assert.assertTrue("Passed", jsonPath.getBoolean("ok"));
+        Assert.assertEquals("Passed", "C052ZQBE39D", jsonPath.getString("channel"));
 
-
+        System.out.println(jsonPath.getString("message.blocks.block_id"));
     }
+
+
+
+    
+
 }
